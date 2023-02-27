@@ -1,122 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
+const jsonData = {
+    "data": {
+        "John Mayers": [
+            {
+                "from": {
+                    "type": "user1"
+                },
+                "msg": {
+                    "message": "Hi, how can I help you?"
+                }
+            },
+            {
+                "from": {
+                    "type": "user2"
+                },
+                "msg": {
+                    "message": "Hi guys Ive got the O2 package and have really slow internet. A speed check online said i can get 3mbps but it seems more like 0.5 these days, just freezing and taking ages to open pages and open audio files for example. I have decided to switch to the UPC package which offers 10mbps but do you think i will get it?"
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatRoom</title>
-    <link href="styling.css" rel="stylesheet" />
-    <script src="/functionalities.js" defer></script>
+                }
+            },
+            {
+                "from": {
+                    "type": "user1"
+                },
+                "msg": {
+                    "message": "Sure! I will definitely help you with you query. Could you please confirm your email address?"
+                }
+            },
+            {
+                "from": {
+                    "type": "user2"
+                },
+                "msg": {
+                    "message": "john.mayers@gmail.com"
 
-</head>
+                }
+            }
+        ],
+        "Tony Stark": [
+            {
+                "from": {
+                    "type": "user1"
+                },
+                "msg": {
+                    "message": "Hi, how can I help you?"
+                }
+            },
+            {
+                "from": {
+                    "type": "user2"
+                },
+                "msg": {
+                    "message": "Hi, my computer is not working since yesterday. I need the computer to reboot my Iron Man suit. Could you please help me?"
+                }
+            },
+            {
+                "from": {
+                    "type": "user1"
+                },
+                "msg": {
+                    "message": "Sure! I will definitely help you with you query. Could you please confirm your email address?"
+                }
+            },
+            {
+                "from": {
+                    "type": "user2"
+                },
+                "msg": {
+                    "message": "tony.stark@gmail.com"
+                }
+            }
+        ]
+    }
+};
+const contacts = document.querySelectorAll('.contact');
+// const contactsDetails = document.querySelectorAll('.contact-details');
+const contactName = document.getElementById('contact-name');
+const contactProfile = document.getElementById('contact-profile');
+const header = document.querySelector('.header');
 
-<body>
-    <div class="main-container">
-        <!-- Left chat Session -->
-        <div class="chat-section">
-            <div class="chat-header">
-                <h4>Chat Session </h4>
-            </div>
+const messages = document.querySelector('.messages');
+messages.classList.add("msg")
+contacts.forEach(contact => {
+    contact.addEventListener('click', () => {
+        const name = contact.getAttribute('data-name');
+        const profile = contact.getAttribute('profile');
 
-            <div class="chat-contacts contacts">
-                <div class="profile contact">
-                    <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="" srcset="" height="50px" width="50px" style="border-radius: 50%">
-                </div>
+        const data = jsonData.data[name];
 
-                <div class="contact-details contact" data-name="John Mayers">
-                    <strong>Tony Stark</strong> <span> 3 min ago</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur </p>
-                </div>
-            </div>
+        contactName.textContent = name;
+        contactProfile.textContent = profile
+        header.textContent = data[0].msg.message;
+        messages.innerHTML = '';
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add("chat-messages")
+            div.classList.add(item.from.type);
+            div.textContent = item.msg.message;
+            messages.appendChild(div);
+        });
+    });
 
-            <div class="chat-contacts contacts">
-                <div class="profile contact">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="" srcset="" height="50px" width="50px" style="border-radius: 50%">
-                </div>
-                <div class="contact-details  contact" data-name="Tony Stark">
-                    <strong>Tony Stark</strong> <span> 15 min ago</span>
-                    <p>Lorem ipsumsddddddddddddddd
-                    </p>
-                </div>
-            </div>
+    // By default, show chat 1 details
+    if (contact.getAttribute('data-name') === 'John Mayers') {
+        const data = jsonData.data['John Mayers'];
 
-            <div class="chat-contacts contacts">
-                <div class="profile contact">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="" srcset="" height="50px" width="50px" style="border-radius: 50%">
-                </div>
-                <div class="contact-details  contact" data-name="User3">
-                    <strong>Tony Stark</strong> <span> 19 min ago</span>
-                    <p>Lorem ipsum dolor sit amet
-                    </p>
-                </div>
-            </div>
-            <div class="chat-contacts contacts">
-                <div class="profile contact">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="" srcset="" height="50px" width="50px" style="border-radius: 50%">
-                </div>
-                <div class="contact-details  contact" data-name="Tony Stark">
-                    <strong>Tony Stark</strong> <span> 3 min ago</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing eli
-                    </p>
-                </div>
-            </div>
-            <div class="chat-contacts contacts">
-                <div class="profile contact">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="" srcset="" height="50px" width="50px" style="border-radius: 50%">
-                </div>
-                <div class="contact-details contact" data-name="User5">
-                    <strong>Tony Stark</strong> <span> 3 min ago</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing eli
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Chat Details -->
-        <div class="chat-details">
-            <div class="chat-details-sub-container">
-                <div class="chat-header">
-                    <h4>Chat Details</h4>
-                </div>
-
-                <!-- chat-Active contact / User -->
-
-                <div class="chat-contacts details">
-                    <div class="profile">
-                        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                            id="contact-profile" alt="" srcset="" height="50px" width="50px" style="border-radius: 50%">
-                    </div>
-                    <div class="contact-details">
-                        <strong id="contact-name"></strong>
-                        <div class="chat-details"></div>
-                        <p>
-                            Account Manager
-                        </p>
-
-                    </div>
-                </div>
-
-                <div class="header"></div>
-                <div class="messages"></div>
-
-                <!-- typing-section... -->
-                <div class="typing-section container">
-                    <textarea name="sent-messages" id="" placeholder="Type your messages here..." cols="100" rows="4">
-                                            </textarea>
-                    <button type="submit" class="send">Send</button>
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-</body>
-
-</html>
+        contactName.textContent = 'John Mayers';
+        contactProfile.textContent = 'Software Developer';
+        header.textContent = data[0].msg.message;
+        messages.innerHTML = '';
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add("chat-messages")
+            div.classList.add(item.from.type);
+            div.textContent = item.msg.message;
+            messages.appendChild(div);
+        });
+    }
+});
